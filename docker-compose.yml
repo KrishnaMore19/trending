@@ -1,0 +1,54 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: trending-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: trending_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - trending_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trending-backend
+    env_file: ./backend/.env
+    environment:
+      - DOCKER=true
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=123456
+      - DATABASE_NAME=trending_db
+      - DATABASE_PORT=5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - trending_network
+
+  frontend:
+    build:
+      context: ./frontend/vite-project
+      dockerfile: Dockerfile
+    container_name: trending-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Enables hot reload inside Docker
+    depends_on:
+      - backend
+    networks:
+      - trending_network
+
+volumes:
+  postgres_data:
+
+networks:
+  trending_network:
+    driver: bridge

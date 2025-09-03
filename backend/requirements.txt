@@ -1,0 +1,27 @@
+# FastAPI and Server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+
+# Database
+sqlalchemy==2.0.36
+psycopg2-binary
+
+# Web Scraping
+selenium==4.26.1
+webdriver-manager==4.0.2
+
+# HTTP Requests
+requests==2.32.3
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# CORS and Additional FastAPI features (included in fastapi[all])
+# fastapi[all] includes: jinja2, python-multipart, itsdangerous, pyyaml, ujson, orjson, email-validator, httpx, aiofiles
+# If you want all features:
+# fastapi[all]==0.115.0
+
+# Alternative: Install only what you need
+python-multipart==0.0.16
+jinja2==3.1.4
+aiofiles==24.1.0
