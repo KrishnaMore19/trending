@@ -25,17 +25,29 @@ A **full-stack project** to scrape trending topics from Twitter (X) using **Sele
 Create a `.env` file in the backend folder:  
 
 ```env
-# Twitter credentials
-TWITTER_USERNAME=your_username
-TWITTER_PASSWORD=your_password
-TWITTER_EMAIL=your_email
+# Twitter/X Credentials
+# -------------------------
+TWITTER_USERNAME=your_twitter_username
+TWITTER_PASSWORD=your_twitter_password
+TWITTER_EMAIL=your_email@example.com
 
-# Database
-DATABASE_URL=postgresql://postgres:123456@db:5432/trending_db
+# -------------------------
+# Database Configuration
+# -------------------------
+# Default: Works locally with localhost:5432
+# Docker: Automatically switches to 'db' when DOCKER=true
+DATABASE_USER=postgres
+DATABASE_PASSWORD=your_database_password
+DATABASE_NAME=trending_db
+DATABASE_PORT=5432
+DATABASE_HOST=localhost
 
-# Backend host/port
+# -------------------------
+# Application Configuration
+# -------------------------
 PORT=8000
 HOST=0.0.0.0
+
 ```
 
 ---
